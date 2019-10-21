@@ -27,11 +27,15 @@ class Utility
 
     /**
      * 生成签名
-     * @param array $data
+     * @param array $param
      * @return string
      */
-    public function generateSign(array $data): string
+    public function generateSign(array $param): string
     {
+        $data = [];
+        foreach ($param as $key => $value) {
+            if($key!='sign') $data[$key] = $value;
+        }
         ksort($data);
         $signType = isset($data['sign_type']) ? $data['sign_type'] : 'MD5';
         switch ($signType) {
